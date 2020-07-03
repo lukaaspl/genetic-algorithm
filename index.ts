@@ -86,6 +86,20 @@ class GeneticAlgorithm {
       chromosome,
     }));
 
+    const haveNegativeValue = fitnesses.some(({ value }) => value < 0);
+
+    if (haveNegativeValue) {
+      const lowestValue = Math.min(...fitnesses.map(({ value }) => value));
+
+      const normalizedFitnesses = fitnesses.map(({ value, ...fitness }) => ({
+        ...fitness,
+        value: value + Math.abs(lowestValue) + 1,
+      }));
+
+      this.fitnesses = normalizedFitnesses;
+      return;
+    }
+
     this.fitnesses = fitnesses;
   }
 
