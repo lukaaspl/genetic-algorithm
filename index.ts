@@ -190,7 +190,11 @@ class GeneticAlgorithm {
         return chromosome;
       }
 
-      const mutationPoint = Utils.getRandomInteger(0, chromosome.getLength());
+      const mutationPoint = Utils.getRandomInteger(
+        0,
+        chromosome.getLength() - 1
+      );
+
       const mutatedValue =
         chromosome.asBinary().charAt(mutationPoint) === "0" ? "1" : "0";
 
